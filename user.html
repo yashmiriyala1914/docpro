@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Book Doctor Appointment</title>
+  <style>
+    body {
+      background-image: url('hosi1.jpg');
+      background-size: cover;
+      font-family: 'Poppins', sans-serif;
+      padding: 40px;
+      color: #fff;
+    }
+    .form-container {
+      background: rgba(0,0,0,0.6);
+      padding: 20px;
+      border-radius: 12px;
+      max-width: 400px;
+      margin: auto;
+    }
+    input, textarea, button {
+      width: 100%;
+      margin: 10px 0;
+      padding: 10px;
+      font-size: 16px;
+      border: none;
+      border-radius: 8px;
+    }
+    button {
+      background-color: #4caf50;
+      color: white;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="form-container">
+    <h2>Book Appointment</h2>
+    <input type="text" id="name" placeholder="Full Name" required>
+    <input type="number" id="age" placeholder="Age" required>
+    <textarea id="disease" placeholder="Known Diseases (if any)"></textarea>
+    <textarea id="problem" placeholder="Describe your problem" required></textarea>
+    <button onclick="bookAppointment()">Book Now</button>
+  </div>
+
+  <script>
+    function bookAppointment() {
+      alert('Appointment Booked Successfully!');
+      window.location.href = 'map.html';
+    }
+  </script>
+</body>
+</html>

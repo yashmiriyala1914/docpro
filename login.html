@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Login - HealthMate</title>
+  <link rel="stylesheet" href="body {.css"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&display=swap" rel="stylesheet">
+</head>
+<body class="login-bg">
+
+  <!-- Notification message -->
+  <div id="notification" class="notification">OTP sent successfully!</div>
+
+  <div class="login-container">
+    <div class="login-box glass">
+      <h2>Welcome Back 👋</h2>
+      <p>Login to book your doctor appointment</p>
+
+      <button class="btn-google">
+        <i class="fab fa-google"></i> Sign in with Google
+      </button>
+
+      <div class="divider"><span>OR</span></div>
+
+      <input type="text" id="phoneInput" placeholder="📱 Phone Number" class="login-input"/>
+      <button class="btn-otp" onclick="sendOTP()">Send OTP</button>
+
+      <input type="text" id="otpInput" placeholder="🔐 Enter OTP" class="login-input" style="margin-top:10px;"/>
+      <button class="btn-submit" onclick="verifyOTP()">Verify & Login</button>
+    </div>
+  </div>
+
+  <script>
+    function sendOTP() {
+      const phone = document.getElementById('phoneInput').value;
+      if (phone.length >= 10) {
+        const note = document.getElementById('notification');
+        note.style.display = 'block';
+        setTimeout(() => {
+          note.style.display = 'none';
+        }, 3000);
+      } else {
+        alert("Please enter a valid phone number.");
+      }
+    }
+
+    function verifyOTP() {
+      const otp = document.getElementById('otpInput').value;
+      if (otp.length > 3) {
+        window.location.href = "index.html";
+      } else {
+        alert("Please enter a valid OTP.");
+      }
+    }
+  </script>
+
+</body>
+</html>

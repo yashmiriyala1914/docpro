@@ -1,0 +1,44 @@
+document.addEventListener("DOMContentLoaded", () => {
+  const doctorList = document.getElementById('doctorList');
+  if (doctorList) {
+    const doctors = [
+      { name: "Dr. John Smith", type: "Cardiologist" },
+      { name: "Dr. Lisa Ray", type: "Orthopedic" },
+      { name: "Dr. Raj Kumar", type: "Neurologist" },
+      { name: "Dr. Sara Lee", type: "Dermatologist" },
+      { name: "Dr. Nina Patel", type: "Ophthalmologist" },
+      { name: "Dr. Michael Doe", type: "Pediatrician" },
+      { name: "Dr. Tina Wang", type: "Dentist" },
+      { name: "Dr. Alex Jordan", type: "General Physician" }
+    ];
+
+    doctors.forEach(doc => {
+      doctorList.innerHTML += `
+        <div class="card">
+          <h3>${doc.name}</h3>
+          <p>${doc.type}</p>
+          <a href="doctor-profile.html" class="btn">View Profile</a>
+        </div>`;
+        // Scroll animation
+const revealElements = document.querySelectorAll('.reveal');
+
+window.addEventListener('scroll', () => {
+  revealElements.forEach(el => {
+    const windowHeight = window.innerHeight;
+    const revealTop = el.getBoundingClientRect().top;
+    if (revealTop < windowHeight - 100) {
+      el.classList.add('active');
+    }
+  });
+});
+
+    });
+  }
+});
+// Request permission
+Notification.requestPermission().then(permission => {
+  if (permission === 'granted') {
+    console.log("Push Enabled");
+    // Set up Firebase messaging...
+  }
+});

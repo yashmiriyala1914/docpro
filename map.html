@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Doctor on the Way</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    .message {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: #28a745;
+      color: white;
+      font-size: 20px;
+      padding: 12px;
+      text-align: center;
+      z-index: 100;
+    }
+    #map {
+      position: absolute;
+      top: 50px;
+      bottom: 0;
+      width: 100%;
+      height: calc(100% - 50px); /* Adjusts map height below the message */
+    }
+  </style>
+</head>
+<body>
+  <div class="message">🚑 Dr. Ayesha is on the way to your location...</div>
+  <div id="map"></div>
+
+  <script>
+    function initMap() {
+      const userLocation = { lat: 28.6139, lng: 77.2090 };
+      const doctorLocation = { lat: 28.6170, lng: 77.2150 };
+
+      const map = new google.maps.Map(document.getElementById("map"), {
+        zoom: 14,
+        center: userLocation,
+      });
+
+      new google.maps.Marker({ position: userLocation, map, label: "You" });
+      new google.maps.Marker({ position: doctorLocation, map, label: "Dr" });
+    }
+  </script>
+
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC772Wy-UGsSlxQahHN-7vwg1MWYcgKhjg&callback=initMap" async defer></script>
+</body>
+</html>

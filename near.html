@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Nearby Hospitals & Doctors</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+    }
+    #map {
+      height: 100%;
+      width: 100%;
+    }
+    .message {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      background-color: #007bff;
+      color: white;
+      font-size: 18px;
+      padding: 10px;
+      text-align: center;
+      z-index: 1000;
+    }
+  </style>
+</head>
+<body>
+  <div class="message">📍 Nearby Hospitals & Doctors</div>
+  <div id="map"></div>
+
+  <script>
+    let map;
+
+    function initMap() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(position => {
+          const userLocation = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
+
+          map = new google.maps.Map(document.getElementById('map'), {
+            center: userLocation,
+            zoom: 15
+          });
+
+          // Marker for the user's location
+          new google.maps.Marker({
+            position: userLocation,
+            map: map,
+            icon: 'https://maps.google.com/mapfiles/ms/icons/blue-dot.png',
+            title: 'You are here'
+          });
+
+          const service = new google.maps.places.PlacesService(map);
+
+          // Search for nearby hospitals and doctors
+          service.nearbySearch({
+            location: userLocation,
+            radius: 3000,
+            keyword: 'hospital doctor'
+          }, (results, status) => {
+            if (status === google.maps.places.PlacesServiceStatus.OK) {
+              results.forEach(place => {
+                new google.maps.Marker({
+                  map,
+                  position: place.geometry.location,
+                  title: place.name
+                });
+              });
+            }
+          });
+        }, () => {
+          alert('📍 Location access denied. Cannot show nearby hospitals.');
+        });
+      } else {
+        alert('Geolocation is not supported by your browser.');
+      }
+    }
+  </script>
+
+  <!-- ✅ Requires Places library -->
+  <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyC772Wy-UGsSlxQahHN-7vwg1MWYcgKhjg&callback=initMap&libraries=places" async defer></script>
+</body>
+</html>
